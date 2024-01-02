@@ -1,0 +1,17 @@
+{
+  "hash": "b061f7eb8d206774a5ae75b0b49ab1de",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"housing\"\n---\n\n\n\nDashboard containing consolidated information from multiple sources of housing index data.\n\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

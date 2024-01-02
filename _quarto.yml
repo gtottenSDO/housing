@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "housing"
+  navbar:
+    left:
+      - text: "Rental Indices"
+        menu:
+          - text: "Apartment List"
+            href: dashboard_pages/rent_al.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+editor: visual
+
