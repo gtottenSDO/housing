@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 60c01dc2-8bd9-49c1-aeb0-28c38990ae12
+      url: 'https://gtottensdo.quarto.pub/housing_dashboard'

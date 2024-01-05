@@ -1,25 +1,85 @@
 ---
-title: "Apartment List Rent"
+title: "Apartment List"
 format: 
-  dashboard:
-    orientation: columns
+  dashboard
     
 execute:
   echo: false
+#  cache: false
 ---
 
 ```{r setup, include = FALSE}
+library(crosstalk)
 library(targets)
 
 ```
 
-# Description
+# Apartment List Rents
 
-## Column
+```{r al-load-process, include = FALSE}
+tar_load(al_shared)
+
+
+```
+
+##  {.sidebar}
 
 Data is from the [Apartment List Data and Rent Estimates](https://www.apartmentlist.com/research/category/data-rent-estimates).
 
-### Row {.tabset}
+```{r}
+
+filter_slider(
+  id = "time",
+  label = "Date",
+  sharedData = al_shared,
+  column = ~ date,
+  step = 30
+)
+filter_select(
+            "l_type",
+            "Location Type",
+            al_shared,
+            ~ location_type,
+            multiple = FALSE
+        )
+filter_select(
+            "r_type",
+            "Rental Type",
+            al_shared,
+            ~ rental_type,
+            multiple = FALSE
+)
+
+```
+
+```{js}
+
+const setDefaultValue = function(filterId, defaultValue) {
+  window.addEventListener("load", function(event) { 
+    document.getElementById(filterId).getElementsByClassName("selectized")[0].selectize.setValue(defaultValue, false);
+  });
+};
+
+setDefaultValue("l_type", "State")
+setDefaultValue("r_type", "overall")
+
+```
+
+## Apartment List Rents {.tabset}
+
+```{r plot-al-rents}
+#| title: Plots
+tar_read(al_rent_plot)
+
+
+```
+
+```{ar al-data}
+#| title: Data
+
+
+
+```
 
 ::: {.card title="Methodology"}
 The Apartment List Rent Estimates are tabulated using fully-representative median rent statistics for recent movers taken from the Census Bureau’s American Community Survey, extrapolated forward to the current month using a growth rate calculated from real-time lease transactions that take place on our platform. We use a same-unit, repeat-transaction analysis similar to Case-Shiller’s approach, comparing only units that are available across both time periods to provide an accurate picture of rent growth. Our approach also corrects for the sample bias inherent in private listing sources to produce results that are representative of the entire rental market. For a more thorough explanation, please see our complete Rent Estimate Methodology.
@@ -28,37 +88,3 @@ The Apartment List Rent Estimates are tabulated using fully-representative media
 ::: {.card title="Description"}
 Apartment List Rent Estimates: monthly estimates of the median rent paid for new leases in a given market. These rent estimates are available at the national, state, metro, county, and city levels back to January 2017. We also provide a summary file which contains the current rent levels as well as month-over-month and year-over-year growth rates for all locations in our sample.
 :::
-
-# National Comparison
-
-```{r load-targets}
-#| include: false
-tar_load(al_rent_plots)
-
-```
-
-## Row {.tabset}
-
-```{r}
-#| title: Colorado
-
-al_rent_plots$Colorado
-```
-
-```{r}
-#| title: Denver-Aurora-Lakewood
-
-al_rent_plots$`Denver-Aurora-Lakewood, CO`
-
-```
-
-```{r}
-#| title: Boulder
-al_rent_plots$`Boulder, CO`
-
-```
-
-```{r}
-#| title: Colorado Springs
-al_rent_plots$`Colorado Springs, CO`
-```

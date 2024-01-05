@@ -5,47 +5,74 @@
 
 # Load packages required to define the pipeline:
 library(targets)
-# library(tarchetypes) # Load other packages as needed.
+library(crosstalk)
 
 # Set target options:
 tar_option_set(
-  packages = c("tidyverse", "vroom", "plotly",
-  "scales", "purrr"),
+  packages = c(
+    "tidyverse", "vroom", "plotly",
+    "scales", "purrr"),
   format = "rds",
-  error = "null")
+  error = "null"
+)
 
 # tar_make_clustermq() is an older (pre-{crew}) way to do distributed computing
 # in {targets}, and its configuration for your machine is below.
 options(clustermq.scheduler = "multiprocess")
 
-# tar_make_future() is an older (pre-{crew}) way to do distributed computing
-# in {targets}, and its configuration for your machine is below.
-# Install packages {{future}}, {{future.callr}}, and {{future.batchtools}} to allow use_targets() to configure tar_make_future() options.
-
 # Run the R scripts in the R/ folder with your custom functions:
 lapply(list.files("R", full.names = TRUE), source)
-# source("other_functions.R") # Source other scripts as needed.
 
 # Replace the target list below with your own:
 list(
   tar_target(
-    al_rent_file, 
-    "_data/Apartment_List_Rent_Estimates.csv", 
-    format = "file"),
+    al_rent_file,
+    "_data/Apartment_List_Rent_Estimates.csv",
+    format = "file"
+  ),
   tar_target(
-    al_vacancy_file, 
+    al_vacancy_file,
     "_data/Apartment_List_Vacancy_Index.csv",
-    format = "file"),
+    format = "file"
+  ),
   tar_target(
     al_rents,
     process_apartmentlist_estimates(al_rent_file)
+  ),
+  tar_target(
+    al_shared,
+    al_rents |> filter(location_type %in% c("State", "Metro")) |> 
+                         SharedData$new(key = ~key_id)
   ),
   tar_target(
     al_vacancy,
     process_apartmentlist_vacancy(al_vacancy_file)
   ),
   tar_target(
-    al_rent_plots,
-    al_create_plots(al_rents)
+    al_rent_plot,
+    output_rent(al_shared)
+  ),
+  tar_target(
+    zori_all_homes_file,
+    "_data/Metro_zori_uc_sfrcondomfr_sm_month.csv",
+    format = "file"
+  ),
+  tar_target(
+    zori_single_family_file,
+    "_data/Metro_zori_uc_sfr_sm_month.csv",
+    format = "file"
+  ),
+  tar_target(
+    zori_multi_family_file,
+    "_data/Metro_zori_uc_mfr_sm_month.csv",
+    format = "file"
+  ),
+  tar_target(
+    zori_rents,
+    combine_zori_estimates(
+      zori_all_homes_file,
+      zori_single_family_file,
+      zori_multi_family_file
+    )
   )
 )

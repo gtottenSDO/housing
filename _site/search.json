@@ -4,13 +4,13 @@
     "href": "index.html",
     "title": "housing",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Dashboard containing consolidated information from multiple sources of housing index data."
   },
   {
-    "objectID": "dashboard_pages/rent_al.html",
-    "href": "dashboard_pages/rent_al.html",
-    "title": "Apartment List Rent",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "library(targets)\n\nData is from the Apartment List Data and Rent Estimates.\n\nColumn\n\ntar_load(al_rent_plots)\nal_rent_plots$Colorado\n\n\n\n\n\n\n\nColumn\n\nRow\n\nThe Apartment List Rent Estimates are tabulated using fully-representative median rent statistics for recent movers taken from the Census Bureau’s American Community Survey, extrapolated forward to the current month using a growth rate calculated from real-time lease transactions that take place on our platform. We use a same-unit, repeat-transaction analysis similar to Case-Shiller’s approach, comparing only units that are available across both time periods to provide an accurate picture of rent growth. Our approach also corrects for the sample bias inherent in private listing sources to produce results that are representative of the entire rental market. For a more thorough explanation, please see our complete Rent Estimate Methodology.\n\n\nApartment List Rent Estimates: monthly estimates of the median rent paid for new leases in a given market. These rent estimates are available at the national, state, metro, county, and city levels back to January 2017. We also provide a summary file which contains the current rent levels as well as month-over-month and year-over-year growth rates for all locations in our sample."
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   }
 ]

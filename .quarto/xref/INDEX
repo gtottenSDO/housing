@@ -10,5 +10,8 @@
   },
   "dashboard_pages/rent_al.qmd": {
     "rent_al.html": "61223e7b"
+  },
+  "dashboard_pages/rent_zori.qmd": {
+    "rent_zori.html": "ebc82dbf"
   }
 }
