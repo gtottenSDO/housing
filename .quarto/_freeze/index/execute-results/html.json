@@ -1,17 +1,12 @@
 {
-  "hash": "b061f7eb8d206774a5ae75b0b49ab1de",
+  "hash": "0ed149254ea79db5f96ebf31e2d55567",
   "result": {
-    "engine": "knitr",
-    "markdown": "---\ntitle: \"housing\"\n---\n\n\n\nDashboard containing consolidated information from multiple sources of housing index data.\n\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n",
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"housing\"\n---\n\nDashboard containing consolidated information from multiple sources of housing index data.\n\n\n\n```{js}\n#| output: FALSE\n\nconst setDefaultValue = function(filterId, defaultValue) {\n  window.addEventListener(\"load\", function(event) { \n    document.getElementById(filterId).getElementsByClassName(\"selectized\")[0].selectize.setValue(defaultValue, false);\n  });\n};\n\n\n\n```\n\n",
     "supporting": [
-      "index_files"
+      "index_files\\figure-html"
     ],
-    "filters": [
-      "rmarkdown/pagebreak.lua"
-    ],
-    "includes": {},
-    "engineDependencies": {},
-    "preserve": {},
-    "postProcess": true
+    "filters": [],
+    "includes": {}
   }
 }

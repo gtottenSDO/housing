@@ -4,7 +4,7 @@
 
 # read in data from csv files - update file names as needed
 
-process_apartmentlist_estimates <- function(file) {
+process_al_estimates <- function(file) {
     vroom(file) %>%
         pivot_longer(
             cols = -c(location_name:bed_size),
@@ -13,26 +13,31 @@ process_apartmentlist_estimates <- function(file) {
         ) %>%
         filter(!is.na(rent_estimate)) %>%
         rename(rental_type = bed_size) |>
-        mutate(key_id = paste(location_name, location_type, rental_type, sep = "_"),
-               date = ym(date)) %>%
-        filter(month(date) %in% c(3, 6, 9, 12)) %>%
+        mutate(
+            key_id = paste(location_name, location_type, rental_type, sep = "_"),
+            date = ym(date)
+        ) %>%
         group_by(date, rental_type, location_type) %>%
         arrange(date, rental_type, desc(rent_estimate)) %>%
-        mutate(fips = str_pad(location_fips_code, 2, pad = "0"),
-               rent_rank = rank(desc(rent_estimate))) %>%
+        mutate(
+            fips = str_pad(location_fips_code, 2, pad = "0"),
+            rent_rank = rank(desc(rent_estimate))
+        ) %>%
         ungroup() %>%
         group_by(metro) %>%
         mutate(
             state = ifelse(is.na(state),
-                           paste(unique(state[!is.na(state)]),
-                                 collapse = ", "),
-                           state),
+                paste(unique(state[!is.na(state)]),
+                    collapse = ", "
+                ),
+                state
+            ),
             co_flag = ifelse(state == "Colorado", TRUE, FALSE)
         ) %>%
         ungroup()
 }
 
-process_apartmentlist_vacancy <- function(file) {
+process_al_vacancy <- function(file) {
     vacancy_index <- vroom(file) %>%
         pivot_longer(
             cols = -c(location_name:metro),
@@ -59,14 +64,18 @@ process_zori_estimates <-
                 names_to = "date",
                 values_to = "rent_estimate"
             ) |>
-            mutate(date = ymd(date)) |>
-            filter(month(date) %in% c(3, 6, 9, 12)) |>
+            mutate(
+                key_id = paste(location_name, location_type, rental_type, sep = "_"),
+                date = ymd(date)) |>
             group_by(date, rental_type, location_type) |>
             arrange(date, rental_type, desc(rent_estimate)) |>
-            mutate(rent_rank = rank(desc(rent_estimate)),
-                   co_flag = ifelse(state == "CO",
-                                    TRUE,
-                                    FALSE)) |>
+            mutate(
+                rent_rank = rank(desc(rent_estimate)),
+                co_flag = ifelse(state == "CO",
+                    TRUE,
+                    FALSE
+                )
+            ) |>
             ungroup()
     }
 
@@ -76,27 +85,5 @@ combine_zori_estimates <-
              multi_family_file) {
         process_zori_estimates(all_homes_file, "All Homes") %>%
             bind_rows(process_zori_estimates(single_family_file, "Single Family")) %>%
-            bind_rows(process_zori_estimates(multi_family_file, "Multi Family")) |>
-            SharedData$new()
+            bind_rows(process_zori_estimates(multi_family_file, "Multi Family"))
     }
-
-rent_filters <- function(shared_rents) {
-    list(
-        location_type = filter_select(
-            "l_type",
-            "Location Type",
-            shared_rents,
-            ~ location_type,
-            multiple = FALSE
-        ),
-        
-        rental_type =filter_select(
-            "r_type",
-            "Rental Type",
-            shared_rents,
-            ~ rental_type,
-            multiple = FALSE
-        )
-    )
-    
-}

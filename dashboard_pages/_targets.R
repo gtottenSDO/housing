@@ -11,7 +11,8 @@ library(crosstalk)
 tar_option_set(
   packages = c(
     "tidyverse", "vroom", "plotly",
-    "scales", "purrr"),
+    "scales", "DT"
+  ),
   format = "rds",
   error = "null"
 )
@@ -37,20 +38,15 @@ list(
   ),
   tar_target(
     al_rents,
-    process_apartmentlist_estimates(al_rent_file)
-  ),
-  tar_target(
-    al_shared,
-    al_rents |> filter(location_type %in% c("State", "Metro")) |> 
-                         SharedData$new(key = ~key_id)
+    process_al_estimates(al_rent_file)
   ),
   tar_target(
     al_vacancy,
-    process_apartmentlist_vacancy(al_vacancy_file)
+    process_al_vacancy(al_vacancy_file)
   ),
   tar_target(
-    al_rent_plot,
-    output_rent(al_shared)
+    al_outputs,
+    create_rent_outputs(al_rents)
   ),
   tar_target(
     zori_all_homes_file,
@@ -74,5 +70,9 @@ list(
       zori_single_family_file,
       zori_multi_family_file
     )
+  ),
+  tar_target(
+    zori_outputs,
+    create_rent_outputs(zori_rents)
   )
 )
