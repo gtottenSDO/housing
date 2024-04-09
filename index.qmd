@@ -1,5 +1,5 @@
 ---
-title: "housing"
+title: "Housing Index Data"
 ---
 
 Dashboard containing consolidated information from multiple sources of housing index data.

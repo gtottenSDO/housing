@@ -9,11 +9,19 @@ website:
         menu:
           - text: "Apartment List"
             href: dashboard_pages/rent_al.qmd
+          - text: "Zillow"
+            href: dashboard_pages/rent_zori.qmd
+      - text: "Housing Prices"
+        menu:
+          - text: "Zillow"
+            href: dashboard_pages/price_zhvi.qmd
+          - text: "FHFA"
+            href: dashboard_pages/price_hpi.qmd
+            
 
 format:
   html:
     theme: cosmo
     css: styles.css
 
-editor: visual
 

@@ -3,7 +3,7 @@ plot_rents <- function(df) {
     plot_ly(df) %>%
     group_by(key_id) %>%
     add_lines(
-      x = ~date, y = ~rent_estimate,
+      x = ~date, y = ~value,
       color = ~co_flag, colors = c("grey", "blue"),
       hoverinfo = "text",
       hovertext = ~ paste(
@@ -14,9 +14,9 @@ plot_rents <- function(df) {
         ": ",
         location_name,
         "<br>Rent: ",
-        scales::dollar(rent_estimate),
+        scales::dollar(value),
         "<br>Rank: ",
-        rent_rank
+        rank
       )
     ) %>%
     layout(xaxis = list(title = "")) %>%
@@ -51,7 +51,7 @@ plot_ranks <- function(df) {
     filter(co_flag == 1) |>
     group_by(key_id) %>%
     add_lines(
-      x = ~date, y = ~rent_rank,
+      x = ~date, y = ~rank,
       hoverinfo = "text",
       hovertext = ~ paste(
         "Date: ",
@@ -61,9 +61,9 @@ plot_ranks <- function(df) {
         ": ",
         location_name,
         "<br>Rent: ",
-        scales::dollar(rent_estimate),
+        scales::dollar(value),
         "<br>Rank: ",
-        rent_rank
+        rank
       )
     ) %>%
     layout(
@@ -80,7 +80,7 @@ plot_ranks <- function(df) {
 
 output_rent_plot <- function(df, region_type) {
   df <- df |> 
-    filter(!is.na(rent_estimate))
+    filter(!is.na(value))
   shared_df <- create_crosstalk_input(df, region_type = region_type, key = ~key_id)
   
 

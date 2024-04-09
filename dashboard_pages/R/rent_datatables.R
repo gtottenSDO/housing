@@ -6,14 +6,14 @@ output_rent_datatable <- function(df, region_type) {
             Location = location_name,
             "Rental Type" = rental_type,
             date,
-            rent_estimate
+            value
         ) %>%
         mutate(
             date = format(date, "%Y %b")
         ) %>%
         pivot_wider(
             names_from = date,
-            values_from = rent_estimate
+            values_from = value
         ) %>%
       create_crosstalk_input(region_type = region_type)
     

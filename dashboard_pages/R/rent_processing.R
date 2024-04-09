@@ -9,19 +9,19 @@ process_al_estimates <- function(file) {
         pivot_longer(
             cols = -c(location_name:bed_size),
             names_to = "date",
-            values_to = "rent_estimate"
+            values_to = "value"
         ) %>%
-        filter(!is.na(rent_estimate)) %>%
+        filter(!is.na(value)) %>%
         rename(rental_type = bed_size) |>
         mutate(
             key_id = paste(location_name, location_type, rental_type, sep = "_"),
             date = ym(date)
         ) %>%
         group_by(date, rental_type, location_type) %>%
-        arrange(date, rental_type, desc(rent_estimate)) %>%
+        arrange(date, rental_type, desc(value)) %>%
         mutate(
             fips = str_pad(location_fips_code, 2, pad = "0"),
-            rent_rank = rank(desc(rent_estimate))
+            rank = rank(desc(value))
         ) %>%
         ungroup() %>%
         group_by(metro) %>%
@@ -62,15 +62,15 @@ process_zori_estimates <-
             pivot_longer(
                 cols = -c(rental_type:state),
                 names_to = "date",
-                values_to = "rent_estimate"
+                values_to = "value"
             ) |>
             mutate(
                 key_id = paste(location_name, location_type, rental_type, sep = "_"),
                 date = ymd(date)) |>
             group_by(date, rental_type, location_type) |>
-            arrange(date, rental_type, desc(rent_estimate)) |>
+            arrange(date, rental_type, desc(value)) |>
             mutate(
-                rent_rank = rank(desc(rent_estimate)),
+                rank = rank(desc(value)),
                 co_flag = ifelse(state == "CO",
                     TRUE,
                     FALSE

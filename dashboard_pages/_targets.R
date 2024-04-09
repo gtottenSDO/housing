@@ -74,5 +74,31 @@ list(
   tar_target(
     zori_outputs,
     create_rent_outputs(zori_rents)
+  ),
+  tar_target(
+    fhfa_file,
+    "_data/HPI_master.csv",
+    format = "file"
+  ),
+  tar_target(
+    fhfa_raw,
+    process_fhfa_hpi(fhfa_file)
+  ),
+  tar_target(
+    fhfa_hpi,
+    process_hpi(fhfa_raw)
+  ),
+  tar_target(
+    fm_file,
+    "_data/fmhpi_master_file.csv",
+    format = "file"
+  ),
+  tar_target(
+    fm_raw,
+    process_fm_hpi(fm_file)
+  ),
+  tar_target(
+    fm_hpi,
+    process_hpi(fm_raw)
   )
 )

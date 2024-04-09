@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "housing",
+    "title": "Housing Index Data",
     "section": "",
-    "text": "Dashboard containing consolidated information from multiple sources of housing index data."
+    "text": "Dashboard containing consolidated information from multiple sources of housing index data.\n#| output: FALSE\n\nconst setDefaultValue = function(filterId, defaultValue) {\n  window.addEventListener(\"load\", function(event) { \n    document.getElementById(filterId).getElementsByClassName(\"selectized\")[0].selectize.setValue(defaultValue, false);\n  });\n};"
   },
   {
     "objectID": "about.html",
