@@ -65,15 +65,15 @@ create_fhfa_filters <- function(fhfa_df, r_lvel) {
   
 }
 
-create_filter(df, region_type, filter_col, filter_label) {
-  filter_select(
-    paste(filter_col, region_type, sep = "_"),
-    filter_label,
-    df,
-    ~ filter_col,
-    multiple = TRUE
-  )
-  )
-  
-}
+# create_filter(df, region_type, filter_col, filter_label) {
+#   filter_select(
+#     paste(filter_col, region_type, sep = "_"),
+#     filter_label,
+#     df,
+#     ~ filter_col,
+#     multiple = TRUE
+#   )
+#   
+#   
+# }
 

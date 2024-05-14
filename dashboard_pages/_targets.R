@@ -28,12 +28,12 @@ lapply(list.files("R", full.names = TRUE), source)
 list(
   tar_target(
     al_rent_file,
-    "_data/Apartment_List_Rent_Estimates.csv",
+    "_data/Apartment_List_Rent_Estimates_2024_04.csv",
     format = "file"
   ),
   tar_target(
     al_vacancy_file,
-    "_data/Apartment_List_Vacancy_Index.csv",
+    "_data/Apartment_List_Vacancy_Index_2024_04.csv",
     format = "file"
   ),
   tar_target(
@@ -50,17 +50,17 @@ list(
   ),
   tar_target(
     zori_all_homes_file,
-    "_data/Metro_zori_uc_sfrcondomfr_sm_month.csv",
+    "_data/Metro_zori_uc_sfrcondomfr_sm_month_2024_04.csv",
     format = "file"
   ),
   tar_target(
     zori_single_family_file,
-    "_data/Metro_zori_uc_sfr_sm_month.csv",
+    "_data/Metro_zori_uc_sfr_sm_month_2024_04.csv",
     format = "file"
   ),
   tar_target(
     zori_multi_family_file,
-    "_data/Metro_zori_uc_mfr_sm_month.csv",
+    "_data/Metro_zori_uc_mfr_sm_month_2024_04.csv",
     format = "file"
   ),
   tar_target(
