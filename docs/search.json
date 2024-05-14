@@ -4,13 +4,13 @@
     "href": "index.html",
     "title": "Housing Index Data",
     "section": "",
-    "text": "Dashboard containing consolidated information from multiple sources of housing index data.\n#| output: FALSE\n\nconst setDefaultValue = function(filterId, defaultValue) {\n  window.addEventListener(\"load\", function(event) { \n    document.getElementById(filterId).getElementsByClassName(\"selectized\")[0].selectize.setValue(defaultValue, false);\n  });\n};"
+    "text": "Dashboard containing consolidated information from multiple sources of housing index data."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "About this site\n\n\n[1] 2"
   }
 ]

@@ -19,27 +19,8 @@ tar_load(al_outputs)
 
 ```
 
-
-# Description
-
-## Overview {height=10%}
-
-::: {.card title="Overview"}
-Data is from the [Apartment List Data and Rent Estimates](https://www.apartmentlist.com/research/category/data-rent-estimates).
-:::
-
-## Cards {height=90%}
-
-::: {.card title="Methodology"}
-The Apartment List Rent Estimates are tabulated using fully-representative median rent statistics for recent movers taken from the Census Bureau’s American Community Survey, extrapolated forward to the current month using a growth rate calculated from real-time lease transactions that take place on our platform. We use a same-unit, repeat-transaction analysis similar to Case-Shiller’s approach, comparing only units that are available across both time periods to provide an accurate picture of rent growth. Our approach also corrects for the sample bias inherent in private listing sources to produce results that are representative of the entire rental market. For a more thorough explanation, please see our complete Rent Estimate Methodology.
-:::
-
-::: {.card title="Description"}
-Apartment List Rent Estimates: monthly estimates of the median rent paid for new leases in a given market. These rent estimates are available at the national, state, metro, county, and city levels back to January 2017. We also provide a summary file which contains the current rent levels as well as month-over-month and year-over-year growth rates for all locations in our sample.
-:::
-
 ```{js}
-#| output: FALSE
+#| include: FALSE
 
 const setDefaultValue = function(filterId, defaultValue) {
   window.addEventListener("load", function(event) { 
@@ -50,6 +31,26 @@ const setDefaultValue = function(filterId, defaultValue) {
 
 
 ```
+
+# Description
+
+## Overview {height=20%}
+
+::: {.card title="Overview"}
+Data is from the [Apartment List Data and Rent Estimates](https://www.apartmentlist.com/research/category/data-rent-estimates).
+:::
+
+## Cards {height=80%}
+
+::: {.card title="Methodology"}
+The Apartment List Rent Estimates are tabulated using fully-representative median rent statistics for recent movers taken from the Census Bureau’s American Community Survey, extrapolated forward to the current month using a growth rate calculated from real-time lease transactions that take place on our platform. We use a same-unit, repeat-transaction analysis similar to Case-Shiller’s approach, comparing only units that are available across both time periods to provide an accurate picture of rent growth. Our approach also corrects for the sample bias inherent in private listing sources to produce results that are representative of the entire rental market. For a more thorough explanation, please see our complete Rent Estimate Methodology.
+:::
+
+::: {.card title="Description"}
+Apartment List Rent Estimates: monthly estimates of the median rent paid for new leases in a given market. These rent estimates are available at the national, state, metro, county, and city levels back to January 2017. We also provide a summary file which contains the current rent levels as well as month-over-month and year-over-year growth rates for all locations in our sample.
+:::
+
+
 
 # State {.tabset}
 

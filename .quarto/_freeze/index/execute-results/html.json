@@ -1,8 +1,8 @@
 {
-  "hash": "9a4bbe52e20e661484a3456b69d249af",
+  "hash": "d10f88fd100cb1a0876030ba5ed4b6ae",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Housing Index Data\"\n---\n\n\nDashboard containing consolidated information from multiple sources of housing index data.\n\n\n```{js}\n#| output: FALSE\n\nconst setDefaultValue = function(filterId, defaultValue) {\n  window.addEventListener(\"load\", function(event) { \n    document.getElementById(filterId).getElementsByClassName(\"selectized\")[0].selectize.setValue(defaultValue, false);\n  });\n};\n\n\n\n```\n\n",
+    "markdown": "---\ntitle: \"Housing Index Data\"\n---\n\n\nDashboard containing consolidated information from multiple sources of housing index data.\n\n\n```{js}\n#| include: FALSE\n\nconst setDefaultValue = function(filterId, defaultValue) {\n  window.addEventListener(\"load\", function(event) { \n    document.getElementById(filterId).getElementsByClassName(\"selectized\")[0].selectize.setValue(defaultValue, false);\n  });\n};\n\n\n\n```\n\n",
     "supporting": [
       "index_files"
     ],

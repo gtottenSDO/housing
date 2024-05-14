@@ -21,17 +21,29 @@ tar_load(zori_outputs)
 
 ```
 
+```{js}
+#| include: FALSE
+
+const setDefaultValue = function(filterId, defaultValue) {
+  window.addEventListener("load", function(event) { 
+    document.getElementById(filterId).getElementsByClassName("selectized")[0].selectize.setValue(defaultValue, false);
+  });
+};
+
+
+
+```
 
 
 # Description
 
-## Overview {height=10%}
+## Overview {height=20%}
 
 ::: {.card title="Overview"}
 Data is from the [Zillow Observed Rent Index (ZORI)](https://www.zillow.com/research/methodology-zori-repeat-rent-27092/).
 :::
 
-## Cards {height=90%}
+## Cards {height=80%}
 
 ::: {.card title="Description"}
 Zillow Observed Rent Index (ZORI): A smoothed measure of the typical observed market rate rent across a given region. ZORI is a repeat-rent index that is weighted to the rental housing stock to ensure representativeness across the entire market, not just those homes currently listed for-rent. The index is dollar-denominated by computing the mean of listed rents that fall into the 40th to 60th percentile range for all homes and apartments in a given region, which is weighted to reflect the rental housing stock.
@@ -70,19 +82,6 @@ To make the index more interpretable, we attach a dollar value to the latest dat
 
 References J. Bailey, R. F. Muth and H. O. Nourse, “A Regression Method for Real Estate Price Index Construction,” Journal of the American Statistical Association, vol. 58, pp. 933-942, 1963. E. Case and R. J. Shiller, “The Efficiency of the Market for Single Family Homes,” American Economic Review, vol. 79, pp. 125-137, 1989. W. Ambrose, N. E. Coulson and J. Yoshida, “The Repeat Rent Index,” Review of Economics and Statistics, vol. 91, no. 5, pp. 939-950.
 :::
-
-```{js}
-#| output: FALSE
-
-const setDefaultValue = function(filterId, defaultValue) {
-  window.addEventListener("load", function(event) { 
-    document.getElementById(filterId).getElementsByClassName("selectized")[0].selectize.setValue(defaultValue, false);
-  });
-};
-
-
-
-```
 
 # Metro {.tabset}
 
