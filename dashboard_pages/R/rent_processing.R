@@ -5,7 +5,8 @@
 # read in data from csv files - update file names as needed
 
 process_al_estimates <- function(file) {
-    vroom(file) %>%
+    al_rents <- duckplyr::read_csv_duckdb(file) %>%
+        mutate(across('2017_01':last_col(), as.numeric)) %>% 
         pivot_longer(
             cols = -c(location_name:bed_size),
             names_to = "date",
@@ -34,11 +35,16 @@ process_al_estimates <- function(file) {
             ),
             co_flag = ifelse(state == "Colorado", TRUE, FALSE)
         ) %>%
-        ungroup()
+        ungroup() %>% 
+      as_duckdb_tibble()
+    
+    return(al_rents)
 }
 
+
 process_al_vacancy <- function(file) {
-    vacancy_index <- vroom(file) %>%
+    vacancy_index <- duckplyr::read_csv_duckdb(file) %>%
+      mutate(across('2017_01':last_col(), as.numeric)) %>% 
         pivot_longer(
             cols = -c(location_name:metro),
             names_to = "Date",
@@ -51,7 +57,7 @@ process_al_vacancy <- function(file) {
 process_zori_estimates <-
     function(file,
              rental_type = c("All Homes", "Single Family", "Multi Family")) {
-        vroom(file) %>%
+      zori_est <- duckplyr::read_csv_duckdb(file) %>%
             select(-c(RegionID, SizeRank)) %>%
             mutate(rental_type = rental_type, .before = 1) %>%
             rename(
@@ -76,7 +82,10 @@ process_zori_estimates <-
                     FALSE
                 )
             ) |>
-            ungroup()
+            ungroup() %>% 
+        as_duckdb_tibble()
+      
+      
     }
 
 combine_zori_estimates <-

@@ -6,20 +6,23 @@ process_hpi <- function(hpi_df) {
     ungroup(location_name) |>
     mutate(base_year = "default",
            rank = rank(desc(value), ties.method = "min")) |>
-    ungroup()
+    ungroup() |> 
+    as_duckdb_tibble()
   
-  hpi_reindexed <- reindex_prices(hpi_ranked)
+  hpi_reindexed <- reindex_prices(hpi_ranked) |> 
+    as_duckdb_tibble()
    
   bind_rows(hpi_ranked,
             hpi_reindexed) |> 
     select(-base_value) |> 
     group_by(across(c(-value, -date, - rank))) |> 
     mutate(key_id = cur_group_id()) |>
-    ungroup()
+    ungroup() |> 
+    as_duckdb_tibble()
 }
 
 process_fhfa_hpi <- function(file) {
-  fhfa_hpi <- vroom(file) |>
+  fhfa_hpi <- read_csv_duckdb(file, prudence = "lavish") |>
     mutate(date = as.Date(ifelse(
       frequency == "quarterly",
       yq(paste0(yr, "-", period)),
@@ -38,12 +41,13 @@ process_fhfa_hpi <- function(file) {
       names_to = c("index_type", "seasonal_adjustment"),
       names_sep = "_",
       values_to = "value"
-    )
+    ) |> 
+    as_duckdb_tibble()
   
 }
 
 process_fm_hpi <- function(file) {
-  fm_hpi <- vroom(file) |>
+  fm_hpi <- read_csv_duckdb(file, prudence = "lavish") |>
     mutate(date = ym(paste0(Year, "-", Month))) |>
     select(
       location_type = GEO_Type,
@@ -63,7 +67,8 @@ process_fm_hpi <- function(file) {
       names_to = c("index_type", "seasonal_adjustment"),
       names_sep = "_",
       values_to = "value"
-    )
+    ) |> 
+    as_duckdb_tibble()
   
 }
 
@@ -77,7 +82,8 @@ reindex_prices <- function(df) {
              base_value = ifelse(length(value[date == b_date]) > 0, 
                                  value[date == b_date], NA),
              value = value / base_value * 100) |> 
-      ungroup()
+      ungroup() |> 
+      as_duckdb_tibble()
     
   }
   
