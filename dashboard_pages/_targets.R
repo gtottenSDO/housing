@@ -71,10 +71,10 @@ list(
       zori_multi_family_file
     )
   ),
-  tar_target(
-    zori_outputs,
-    create_rent_outputs(zori_rents)
-  ),
+  # tar_target(
+  #   zori_outputs,
+  #   create_rent_outputs(zori_rents)
+  # ),
   tar_target(
     fhfa_file,
     "_data/HPI_master.csv",
